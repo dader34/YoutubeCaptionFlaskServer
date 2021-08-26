@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask,request,jsonify
 from threading import Thread
 from youtube_transcript_api import YouTubeTranscriptApi as ys
 from flask_cors import CORS
@@ -21,6 +21,7 @@ def post():
         full = ""
         words = []
         js = request.json
+        print(js)
         for word in js["coins"]:
             words.append(word)
         print(words)
@@ -39,12 +40,22 @@ def post():
                         if not word in warr:
                             warr.append(word)
         carr = [[]]
+        for word in words:
+          if(word not in warr):
+            warr.append(word)
         for i, word in enumerate(warr):
             if not word in carr[i]:
                 carr.append([word, wordsarr.count(word)])
+            
 
-        carr.remove([[],1])
+        carr.remove([[], 1])
         carr.remove([])
+        print(carr)
+        print(words)
+        print(warr)
+        if(carr == []):
+          for word in words:
+            carr.append([word,0])
         return jsonify(carr)
 
 
