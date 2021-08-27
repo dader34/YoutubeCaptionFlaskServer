@@ -33,6 +33,7 @@ def post():
                     arr.append(word)
                     if(not word in words):
                       words.append(word)
+                      #
             for idx in arr:
                 for word in words:
                     if idx.lower() != word:
