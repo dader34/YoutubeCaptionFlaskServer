@@ -22,8 +22,8 @@ def post():
         words = []
         js = request.json
         print(js)
-        for word in js["coins"]:
-            words.append(word)
+        # for word in js["coins"]:
+        #     words.append(word)
         print(words)
         for id in js["ids"]:
             ts = ys.get_transcript(id)
@@ -31,6 +31,8 @@ def post():
                 for word in t["text"].split():
                     full += f"{word} "
                     arr.append(word)
+                    if(not word in words):
+                      words.append(word)
             for idx in arr:
                 for word in words:
                     if idx.lower() != word:
